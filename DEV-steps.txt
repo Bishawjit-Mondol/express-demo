@@ -1,0 +1,25 @@
+# Local 
+npm install 
+node index.js
+
+# Build and push image
+docker build -t brave24/express-demo:01 .
+docker push brave24/express-demo:01
+
+# minikube cluster to view activity
+minikube start
+minikube dashboard
+
+# Create deployment
+kubectl create deployment node-app --image=brave24/express-demo:01
+kubectl get deployments
+
+# If no service, create one
+kubectl get services
+kubectl expose deployment node-app --port=3001 --type=LoadBalancer
+
+# To get local machine access, use minikube service
+minikube service node-app
+
+# Check the pods, how many times have been restarted, if there has any issues. 
+kubectl get pods
